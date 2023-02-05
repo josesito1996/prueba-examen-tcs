@@ -1,0 +1,3 @@
+-- CREATE TABLE IF NOT EXISTS role (id_role INT IDENTITY PRIMARY KEY, rol_name varchar(20) NOT NULL);
+CREATE TABLE IF NOT EXISTS exchange_rate (id_exchange INT AUTO_INCREMENT PRIMARY KEY, exchange_rate_currency varchar(20) NOT NULL, calculation_value decimal(18,10) NOT NULL, is_active bit);
+-- CREATE TABLE IF NOT EXISTS user (id_user INT IDENTITY PRIMARY KEY,user_name varchar(15) not null, password varchar(90) NOT NULL,id_role int NOT NULL,FOREIGN KEY (id_role) REFERENCES role(id_role));
