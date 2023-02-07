@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.tcs.service.app.business.CurrencyService;
 import com.tcs.service.app.business.ExchangeRateService;
-import com.tcs.service.app.exception.BadRequestException;
 import com.tcs.service.app.expose.request.ExchangeRateRequest;
 import com.tcs.service.app.expose.response.ExchangeRateResponse;
 
@@ -36,10 +35,8 @@ public class CurrencyServiceImpl implements CurrencyService {
 												exchangeRateDestination.getCalculationValue(), 
 												exchangeRateOrigin.getCalculationValue()))
 										.build();
-							})
-							.switchIfEmpty(Mono.error(new BadRequestException("No se encontro moneda con el monto de destino")));
-				})
-				.switchIfEmpty(Mono.error(new BadRequestException("No se encontró moneda con el monto de origen")));
+							});
+				});
 	}
 
 }

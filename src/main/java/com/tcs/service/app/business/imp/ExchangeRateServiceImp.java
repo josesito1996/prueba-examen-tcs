@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.service.app.business.ExchangeRateService;
 import com.tcs.service.app.business.processor.ExchangeRateResponseProcessor;
 import com.tcs.service.app.entity.ExchangeRateEntity;
+import com.tcs.service.app.exception.BadRequestException;
 import com.tcs.service.app.expose.response.ExchangeRateResponse;
 import com.tcs.service.app.repository.ExchangeRateRepository;
 import com.tcs.service.app.repository.GenericRepository;
@@ -21,7 +22,7 @@ public class ExchangeRateServiceImp extends CrudGenericImpl<ExchangeRateEntity, 
 
 	@Autowired
 	private ExchangeRateRepository exchangeRateRepository;
-	
+
 	@Autowired
 	private ExchangeRateResponseProcessor exchangeRateResponseProcessor;
 
@@ -40,7 +41,7 @@ public class ExchangeRateServiceImp extends CrudGenericImpl<ExchangeRateEntity, 
 
 	@Override
 	public Flux<ExchangeRateResponse> listAllCustom() {
-		
+
 		return exchangeRateRepository
 				.findAll()
 				.map(exchangeRateResponseProcessor::toExchangeRateResponse);
@@ -48,9 +49,11 @@ public class ExchangeRateServiceImp extends CrudGenericImpl<ExchangeRateEntity, 
 
 	@Override
 	public Mono<ExchangeRateEntity> findByExchangeRateCurrency(String exchangeRateCurrency) {
-		
+
 		return exchangeRateRepository
-				.findByExchangeRateCurrency(exchangeRateCurrency);
+				.findByExchangeRateCurrency(exchangeRateCurrency)
+				.switchIfEmpty(Mono
+						.error(new BadRequestException("Tipo de cambio : " + exchangeRateCurrency + " no existe")));
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.tcs.service.app.exception;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -26,6 +28,9 @@ public class ErrorExceptionResponse implements Serializable {
 	
 	@JsonInclude(Include.NON_NULL)
 	private String message;
+	
+	@JsonInclude(Include.NON_NULL)
+	private List<Map<String, String>> details;
 
 	
 }

@@ -21,7 +21,8 @@ public class ExchangeRateController {
 	private CurrencyService currencyService;
 
 	@PostMapping("/transformCurrency")
-	public Mono<ExchangeRateResponse> transformCurrency(@RequestBody @Valid ExchangeRateRequest exchangeRateRequest) {
+	public Mono<ExchangeRateResponse> transformCurrency(@RequestBody 
+			@Valid ExchangeRateRequest exchangeRateRequest) {
 		return currencyService.transformCurrency(exchangeRateRequest);
 	}
 

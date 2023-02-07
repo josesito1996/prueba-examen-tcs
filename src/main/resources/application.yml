@@ -8,5 +8,15 @@ spring:
     url: jdbc:h2:./test
     username: sa
     password: 
-    driver-class-name: org.h2.Driver 
+    driver-class-name: org.h2.Driver
+spring-security:
+  jwt:
+    jjwt:
+      secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+      expiration: 28800
+    password:
+      encoder:
+        secret: 51st3ma$2023.
+        iteration: 150
+        key-length: 256
      
